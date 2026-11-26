@@ -6,7 +6,7 @@ description: Look up or record project knowledge in the user's Obsidian vault at
 # Vault: section-level recall and capture
 
 The vault is the **single home for project knowledge**. Notes can be large, so **never Read a whole note**.
-Everything goes through one script that ships in this skill's folder, `scripts/vault.py` (stdlib Python 3.9+).
+Everything goes through one script that ships in this skill's folder, `scripts/vault.py` (stdlib Python 3.10+).
 Below, `$PY` stands for this command prefix:
 
 ```

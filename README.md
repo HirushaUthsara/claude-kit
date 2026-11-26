@@ -108,7 +108,7 @@ this repo. Skills create these files when you agree, or you can start from [`exa
 | `notebooklm-study.md` | notebooklm-study | your Study HQ URL |
 | `antigravity-factory.md` | antigravity-factory | your agy setup and probe settings |
 
-Requirements: Python 3.9+ as `python3` (macOS, Linux) or `python` (Windows) for the vault script and the hooks
+Requirements: Python 3.10+ as `python3` (macOS, Linux) or `python` (Windows) for the vault script and the hooks
 (standard library only). On Windows the hooks need Git Bash, which Claude Code uses for hooks when it is installed.
 Other tools (`az`, the Databricks CLI, `gh`, the Azure DevOps MCP server, `agy`) only when you use the skill that
 needs them. Tested on Windows, macOS and Linux on every push.

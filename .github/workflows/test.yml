@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: ubuntu-latest, python: "3.9" }
+          - { os: ubuntu-24.04, python: "3.10" }
           - { os: ubuntu-latest, python: "3.13" }
           - { os: macos-latest, python: "3.13" }
           - { os: windows-latest, python: "3.13" }
@@ -32,12 +32,15 @@ jobs:
           sh plugins/vault-memory/hooks/py.sh plugins/vault-memory/skills/vault/scripts/vault.py selftest
       - name: Hooks behave without any local config
         run: |
-          out=$(echo '{"cwd":"."}' | sh plugins/vault-memory/hooks/py.sh plugins/vault-memory/skills/vault/scripts/vault.py session)
-          test -z "$out" || { echo "vault session hook printed output with no vault configured: $out"; exit 1; }
-          echo '{"tool_name":"Read","tool_input":{"file_path":"app/.env"},"cwd":"."}' \
-            | sh plugins/infra-ops/hooks/py.sh plugins/infra-ops/hooks/guard.py pre | grep -q '"deny"'
-          echo '{"tool_name":"Bash","tool_input":{"command":"ls"},"cwd":"."}' \
-            | sh plugins/infra-ops/hooks/py.sh plugins/infra-ops/hooks/guard.py pre | (! grep -q .)
+          vault=$(echo '{"cwd":"."}' | sh plugins/vault-memory/hooks/py.sh plugins/vault-memory/skills/vault/scripts/vault.py session)
+          test -z "$vault" || { echo "vault session hook printed output with no vault configured: $vault"; exit 1; }
+          deny=$(echo '{"tool_name":"Read","tool_input":{"file_path":"app/.env"},"cwd":"."}' \
+            | sh plugins/infra-ops/hooks/py.sh plugins/infra-ops/hooks/guard.py pre)
+          case "$deny" in *'"deny"'*) ;; *) echo "guard did not deny reading app/.env: [$deny]"; exit 1 ;; esac
+          quiet=$(echo '{"tool_name":"Bash","tool_input":{"command":"ls"},"cwd":"."}' \
+            | sh plugins/infra-ops/hooks/py.sh plugins/infra-ops/hooks/guard.py pre)
+          test -z "$quiet" || { echo "guard printed output for a harmless command: $quiet"; exit 1; }
+          echo "hooks ok"
 
   validate:
     runs-on: ubuntu-latest
