@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell|Read|Grep|mcp__azure-devops__pipelines_write|mcp__azure-devops__repo_pull_request_write",
+        "hooks": [
+          { "type": "command", "command": "python -I -S \"${CLAUDE_PLUGIN_ROOT}/hooks/guard.py\" pre", "timeout": 10 }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|PowerShell|mcp__azure-devops__.*",
+        "hooks": [
+          { "type": "command", "command": "python -I -S \"${CLAUDE_PLUGIN_ROOT}/hooks/guard.py\" post", "timeout": 15, "async": true }
+        ]
+      }
+    ],
+    "ConfigChange": [
+      {
+        "hooks": [
+          { "type": "command", "command": "python -I -S \"${CLAUDE_PLUGIN_ROOT}/hooks/guard.py\" config", "timeout": 10 }
+        ]
+      }
+    ]
+  }
+}

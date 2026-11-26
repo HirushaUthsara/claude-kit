@@ -1,0 +1,6 @@
+{
+  "prod": ["contoso-?prod", "contosoprod", "00000000-1111-2222-3333-444444444444", "adb-1234567890123456"],
+  "uat": ["contoso-?uat", "contosouat"],
+  "triggers": ["00000000-1111", "adb-1234567890123456"],
+  "protected_branches": "^(main|master|develop|release(/.+)?)$"
+}

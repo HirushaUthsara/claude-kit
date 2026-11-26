@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-kit",
+  "description": "Claude Code plugins for project memory in Obsidian, safer cloud/infra work, and learning.",
+  "owner": { "name": "HirushaUthsara", "url": "https://github.com/HirushaUthsara" },
+  "plugins": [
+    {
+      "name": "vault-memory",
+      "description": "Obsidian vault as project memory: section-level recall and capture, session handoff, vault-scout agent, context hooks.",
+      "source": "./plugins/vault-memory",
+      "category": "productivity"
+    },
+    {
+      "name": "infra-ops",
+      "description": "Azure and Databricks ops skills, Azure DevOps PR review, reviewer/triage/auditor agents, and a security guard hook.",
+      "source": "./plugins/infra-ops",
+      "category": "development"
+    },
+    {
+      "name": "toolbox",
+      "description": "Adaptive tutoring, a NotebookLM study loop, and a test-first factory loop that supervises the Antigravity CLI.",
+      "source": "./plugins/toolbox",
+      "category": "productivity"
+    }
+  ]
+}

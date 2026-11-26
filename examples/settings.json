@@ -1,0 +1,21 @@
+{
+  "extraKnownMarketplaces": {
+    "claude-kit": { "source": { "source": "github", "repo": "HirushaUthsara/claude-kit" } }
+  },
+  "enabledPlugins": {
+    "vault-memory@claude-kit": true,
+    "infra-ops@claude-kit": true,
+    "toolbox@claude-kit": true
+  },
+  "permissions": {
+    "deny": [
+      "Read(~/**/.env)",
+      "Read(~/**/.env.*)",
+      "Read(~/.databrickscfg)",
+      "Read(~/.pgpass)",
+      "Read(~/.git-credentials)",
+      "Read(~/.netrc)",
+      "Read(~/.ssh/id_*)"
+    ]
+  }
+}

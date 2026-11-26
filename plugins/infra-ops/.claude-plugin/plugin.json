@@ -1,0 +1,8 @@
+{
+  "name": "infra-ops",
+  "version": "1.0.0",
+  "description": "Safer cloud and delivery work: Azure ops against a state store, Databricks ops, Azure DevOps PR review, code-reviewer / log-triage / azure-auditor agents, and a security guard hook (prod-change gate, secret guard, git safety, audit log).",
+  "author": { "name": "HirushaUthsara", "url": "https://github.com/HirushaUthsara" },
+  "license": "MIT",
+  "keywords": ["azure", "databricks", "azure-devops", "code-review", "security", "hooks"]
+}
