@@ -6,15 +6,23 @@ description: Look up or record project knowledge in the user's Obsidian vault at
 # Vault: section-level recall and capture
 
 The vault is the **single home for project knowledge**. Notes can be large, so **never Read a whole note**.
-Everything goes through one script, `scripts/vault.py` in this plugin (stdlib Python):
+Everything goes through one script that ships in this skill's folder, `scripts/vault.py` (stdlib Python 3.9+):
 
 ```
-PY='python -I -S "<this skill's base directory>/../../scripts/vault.py"'
+PY='python -I -S "<this skill's base directory>/scripts/vault.py"'
 ```
 
-The SessionStart hook also prints the exact command as `Vault script: ...`. Setup: the vault path and the
-repo → project map live in `~/.claude/claude-kit/vault.json`; if the script says no vault is configured, tell the
-user how to create it (see the plugin README) instead of guessing a path.
+In Claude Code the SessionStart hook also prints the exact command as `Vault script: ...`.
+
+## First use (the script says "No vault configured")
+
+1. Ask the user for the vault folder (the one that contains `.obsidian/`). Don't guess or search the disk.
+2. Check it exists and holds `.md` notes. Project notes are expected under `Projects/<project name>/`; if the vault
+   is organised differently, say so (notes outside `Projects/` still work for find/get, just without a project).
+3. Ask which code repos map to which project (optional): repo folder name → folder name under `Projects/`.
+4. Write `~/.claude/claude-kit/vault.json`:
+   `{"vault_dir": "<path>", "projects": {"<repo folder>": "<project folder>"}}` (JSON, backslashes escaped).
+5. Run `$PY find <a word from a note title>` to confirm, and tell the user the hooks pick it up from the next session.
 
 **Local conventions:** if `~/.claude/claude-kit/vault.md` exists, read it first. It holds this machine's projects,
 note prefixes, status-note names and any extra rules, and it overrides the defaults below.

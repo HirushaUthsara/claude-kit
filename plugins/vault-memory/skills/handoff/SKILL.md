@@ -12,7 +12,8 @@ by the SessionStart index and prompt hook) and a **resume prompt** (portable, se
 If the user only wants the prompt, skip step 2. If no vault is configured, do steps 1 and 3 only.
 
 **Local conventions:** if `~/.claude/claude-kit/handoff.md` exists, read it first (where repos live, how to find
-the open PR, which note gets the status line).
+the open PR, which note gets the status line). If it doesn't and you had to work one of these out, offer to save it
+there in a line or two.
 
 ## 1. Gather the state (read-only, cheap)
 
@@ -27,8 +28,11 @@ the open PR, which note gets the status line).
 ## 2. Record in the vault (follow the `vault` skill's capture rules)
 
 ```
-PY='python -I -S "<this skill's base directory>/../../scripts/vault.py"'
+PY='python -I -S "<this skill's base directory>/../vault/scripts/vault.py"'
 ```
+
+(The `vault` skill must be installed next to this one; the `Vault script:` line from the SessionStart hook gives the
+same command.)
 
 The repo maps to a vault project through `projects` in `~/.claude/claude-kit/vault.json`. A repo with no mapping
 has no vault home: skip to step 3 and say so.

@@ -108,6 +108,9 @@ Projects with one environment simply declare one env; parity stays dormant.
 2. Scaffold the five files. `HAZARDS.md` starts empty.
 3. Write the project header into `INFRA.md`.
 4. Offer an audit run to populate `observed` for the first time.
+5. If the infra-ops security guard is installed, offer to add the production resource-group, app and subscription
+   names that don't contain "prod" to `~/.claude/claude-kit/guard.json` (`prod` patterns, plus IDs under `triggers`),
+   so changes to them ask first.
 
 ### change
 

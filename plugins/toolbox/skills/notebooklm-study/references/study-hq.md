@@ -9,7 +9,8 @@ If there is no URL or it fails, run Artifact `list` (scope `mine`) and look for 
 - favicon 📌
 - capabilities `{"db": {"rules": [{"path": "", "read": "view", "write": "admin"}]}}`
 
-Then use the new URL.
+Then use the new URL. Whichever way you found or made it, offer to save it to `~/.claude/claude-kit/notebooklm-study.md`
+(one line: `- Study HQ artifact: <url>`) so the next session goes straight there.
 
 ## Data model
 

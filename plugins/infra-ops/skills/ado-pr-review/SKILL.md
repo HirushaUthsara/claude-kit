@@ -10,7 +10,8 @@ posted. Comments appear under the user's name, so **nothing is posted, voted or 
 their approval in this conversation**.
 
 Defaults (organization, project, repos, where local clones live, which notes list known issues): read
-`~/.claude/claude-kit/ado-pr-review.md` if it exists; otherwise take them from the PR link or ask. Tools:
+`~/.claude/claude-kit/ado-pr-review.md` if it exists; otherwise take them from the PR link or ask, and offer to save
+the answers to that file (a few bullet lines) so the next review needs no questions. Tools:
 `mcp__azure-devops__repo_pull_request`, `..._repo_pull_request_thread`,
 `..._repo_pull_request_thread_write`, `..._repo_file`, `..._wit_work_item` (load with ToolSearch
 if they are deferred).
@@ -47,6 +48,10 @@ Leave the user's working tree alone: no checkout, stash or reset. If the repo is
 ## 3. Review with code-reviewer agents
 
 Count changed lines, ignoring lockfiles, generated files and notebook outputs.
+
+No `code-reviewer` agent available (another agent tool, or the skill installed without the infra-ops plugin)? Review
+the diff yourself the same way: read each hunk with enough context to know its callers, grep the callers of every
+changed function, and keep only defects you can turn into a concrete failure (input or state → wrong result).
 
 - Up to ~400 lines: one `code-reviewer` agent.
 - Larger: split by area (backend/API, data and SQL, infra and pipelines, frontend, tests) into 2–4
