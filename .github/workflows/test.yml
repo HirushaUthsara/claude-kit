@@ -1,0 +1,58 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  selftests:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest, python: "3.9" }
+          - { os: ubuntu-latest, python: "3.13" }
+          - { os: macos-latest, python: "3.13" }
+          - { os: windows-latest, python: "3.13" }
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Guard and vault self-tests, run the way the hooks run them
+        run: |
+          sh plugins/infra-ops/hooks/py.sh plugins/infra-ops/hooks/guard.py selftest
+          sh plugins/vault-memory/hooks/py.sh plugins/vault-memory/skills/vault/scripts/vault.py selftest
+      - name: Hooks behave without any local config
+        run: |
+          out=$(echo '{"cwd":"."}' | sh plugins/vault-memory/hooks/py.sh plugins/vault-memory/skills/vault/scripts/vault.py session)
+          test -z "$out" || { echo "vault session hook printed output with no vault configured: $out"; exit 1; }
+          echo '{"tool_name":"Read","tool_input":{"file_path":"app/.env"},"cwd":"."}' \
+            | sh plugins/infra-ops/hooks/py.sh plugins/infra-ops/hooks/guard.py pre | grep -q '"deny"'
+          echo '{"tool_name":"Bash","tool_input":{"command":"ls"},"cwd":"."}' \
+            | sh plugins/infra-ops/hooks/py.sh plugins/infra-ops/hooks/guard.py pre | (! grep -q .)
+
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Claude Code plugin validation (marketplace and each plugin)
+        run: |
+          npx -y @anthropic-ai/claude-code plugin validate .
+          for p in plugins/*/; do npx -y @anthropic-ai/claude-code plugin validate "$p"; done
+      - name: Script syntax
+        run: |
+          node --check plugins/toolbox/skills/antigravity-factory/probe.mjs
+          bash -n plugins/toolbox/skills/antigravity-factory/agy-turn.sh
+          sh -n plugins/infra-ops/hooks/py.sh
+          sh -n plugins/vault-memory/hooks/py.sh

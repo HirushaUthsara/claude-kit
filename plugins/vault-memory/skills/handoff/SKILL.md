@@ -28,11 +28,12 @@ there in a line or two.
 ## 2. Record in the vault (follow the `vault` skill's capture rules)
 
 ```
-PY='python -I -S "<this skill's base directory>/../vault/scripts/vault.py"'
+python3 -I -S "${CLAUDE_SKILL_DIR}/../vault/scripts/vault.py"
 ```
 
-(The `vault` skill must be installed next to this one; the `Vault script:` line from the SessionStart hook gives the
-same command.)
+`$PY` below stands for that command prefix. `${CLAUDE_SKILL_DIR}` is this skill's folder (Claude Code fills it in);
+the `vault` skill must be installed next to it. Use `python` where `python3` doesn't exist (usually Windows). The
+`Vault script:` line from the SessionStart hook gives the same command.
 
 The repo maps to a vault project through `projects` in `~/.claude/claude-kit/vault.json`. A repo with no mapping
 has no vault home: skip to step 3 and say so.

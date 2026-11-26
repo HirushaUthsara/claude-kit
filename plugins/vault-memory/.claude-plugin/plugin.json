@@ -1,6 +1,5 @@
 {
   "name": "vault-memory",
-  "version": "1.0.0",
   "description": "Use an Obsidian vault as Claude's project memory: section-level recall and capture, session handoff with a resume prompt, a vault-scout agent, and hooks that surface relevant notes.",
   "author": { "name": "HirushaUthsara", "url": "https://github.com/HirushaUthsara" },
   "license": "MIT",

@@ -8,7 +8,7 @@ Codex, GitHub Copilot, Gemini CLI, OpenCode, Windsurf and more, through [`npx sk
 
 ## 30-second setup
 
-**Claude Code** (updates itself):
+**Claude Code:**
 
 ```
 /plugin marketplace add HirushaUthsara/claude-kit
@@ -18,6 +18,10 @@ Codex, GitHub Copilot, Gemini CLI, OpenCode, Windsurf and more, through [`npx sk
 ```
 
 Install only the plugins you want. Restart Claude Code once so the hooks load.
+
+To get updates automatically, open `/plugin` → **Marketplaces** → **claude-kit** → enable auto-update (third-party
+marketplaces are off by default). Or update by hand with `/plugin marketplace update claude-kit`. Every commit
+here is a new version.
 
 **Any other agent** (copies editable files into your project; add `-g` for all projects):
 
@@ -104,8 +108,10 @@ this repo. Skills create these files when you agree, or you can start from [`exa
 | `notebooklm-study.md` | notebooklm-study | your Study HQ URL |
 | `antigravity-factory.md` | antigravity-factory | your agy setup and probe settings |
 
-Requirements: `python` 3.9+ on PATH for the vault script and the hooks (standard library only). Other tools (`az`,
-the Databricks CLI, `gh`, the Azure DevOps MCP server, `agy`) only when you use the skill that needs them.
+Requirements: Python 3.9+ as `python3` (macOS, Linux) or `python` (Windows) for the vault script and the hooks
+(standard library only). On Windows the hooks need Git Bash, which Claude Code uses for hooks when it is installed.
+Other tools (`az`, the Databricks CLI, `gh`, the Azure DevOps MCP server, `agy`) only when you use the skill that
+needs them. Tested on Windows, macOS and Linux on every push.
 
 ## The security guard (Claude Code)
 
@@ -122,8 +128,8 @@ It recognises `prod`/`prd`/`uat` in names out of the box; add names that don't s
 pattern-based, fails open on internal errors, and ships with 93 self-test cases:
 
 ```
-python -I -S plugins/infra-ops/hooks/guard.py selftest
-python -I -S plugins/vault-memory/skills/vault/scripts/vault.py selftest
+python3 -I -S plugins/infra-ops/hooks/guard.py selftest
+python3 -I -S plugins/vault-memory/skills/vault/scripts/vault.py selftest
 ```
 
 ## Make it yours

@@ -29,7 +29,7 @@ VAULT = pathlib.Path(os.environ.get("VAULT_DIR") or CONFIG.get("vault_dir") or "
 CACHE = KIT / "vault-cache.marshal"
 # Repo folder name -> vault project folder. Unmapped cwd gets the project list only.
 PROJECTS = CONFIG.get("projects", {})
-RUN = f'python -I -S "{pathlib.Path(__file__).resolve()}"'
+RUN = f'"{sys.executable}" -I -S "{pathlib.Path(__file__).resolve()}"'
 STOP = set("""a an and are as at be but by can do does for from get got has have how i if in into is it its
 me my no not of on or our please should so that the their then there these this to up use was we what when where
 which who why will with you your also any all about tell show give let lets need want make check now just more

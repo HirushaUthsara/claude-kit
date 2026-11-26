@@ -6,12 +6,15 @@ description: Look up or record project knowledge in the user's Obsidian vault at
 # Vault: section-level recall and capture
 
 The vault is the **single home for project knowledge**. Notes can be large, so **never Read a whole note**.
-Everything goes through one script that ships in this skill's folder, `scripts/vault.py` (stdlib Python 3.9+):
+Everything goes through one script that ships in this skill's folder, `scripts/vault.py` (stdlib Python 3.9+).
+Below, `$PY` stands for this command prefix:
 
 ```
-PY='python -I -S "<this skill's base directory>/scripts/vault.py"'
+python3 -I -S "${CLAUDE_SKILL_DIR}/scripts/vault.py"
 ```
 
+`${CLAUDE_SKILL_DIR}` is the folder this SKILL.md is in (Claude Code fills it in; elsewhere use that folder's
+path). Use `python` where `python3` doesn't exist (usually Windows). Keep the quotes: the path may contain spaces.
 In Claude Code the SessionStart hook also prints the exact command as `Vault script: ...`.
 
 ## First use (the script says "No vault configured")
