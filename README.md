@@ -140,4 +140,4 @@ it, then the method) and any files it needs next to it. Keep facts out of skills
 
 ## License
 
-MIT
+[MIT](LICENSE) © 2026 HirushaUthsara
