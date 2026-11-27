@@ -1,7 +1,7 @@
 {
   "name": "toolbox",
-  "description": "Adaptive tutoring (accelerated-learning), a NotebookLM study loop with a Study HQ tracker, and a test-first factory loop that supervises the Antigravity CLI.",
+  "description": "Adaptive tutoring (accelerated-learning), a NotebookLM study loop with a Study HQ tracker, a test-first factory loop that supervises the Antigravity CLI, and a read-only Windows performance diagnosis.",
   "author": { "name": "HirushaUthsara", "url": "https://github.com/HirushaUthsara" },
   "license": "MIT",
-  "keywords": ["learning", "tutoring", "notebooklm", "antigravity", "tdd"]
+  "keywords": ["learning", "tutoring", "notebooklm", "antigravity", "tdd", "windows", "performance"]
 }

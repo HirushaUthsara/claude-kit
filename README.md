@@ -91,6 +91,8 @@ NotebookLM into a study loop with verified sources, quizzes and a progress track
   Study HQ tracker (the tracker page needs Claude's Artifacts).
 - **[antigravity-factory](plugins/toolbox/skills/antigravity-factory/SKILL.md)**: Claude writes the spec and
   verifies; the Antigravity CLI implements, test-first, one cycle at a time.
+- **[windows-perf-diagnosis](plugins/toolbox/skills/windows-perf-diagnosis/SKILL.md)**: read-only diagnosis of a
+  slow, freezing or crashing Windows PC with bundled PowerShell scripts; ends in a short, prioritised report.
 
 ## Your setup stays yours
 

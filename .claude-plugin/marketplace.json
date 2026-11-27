@@ -18,7 +18,7 @@
     },
     {
       "name": "toolbox",
-      "description": "Adaptive tutoring, a NotebookLM study loop, and a test-first factory loop that supervises the Antigravity CLI.",
+      "description": "Adaptive tutoring, a NotebookLM study loop, a test-first factory loop that supervises the Antigravity CLI, and a read-only Windows performance diagnosis.",
       "source": "./plugins/toolbox",
       "category": "productivity"
     }
